@@ -1,0 +1,38 @@
+<h1>{{book.title}}</h1>
+<div>
+    <img alt="{{book.title}}" src={{book.image}}>
+    <dl>
+        <dt>Summary</dt>
+        <dd>{{book.summary}}</dd>
+        <dt>Author</dt>
+        <dd>{{book.author}}</dd>
+        <dt>Genres</dt>
+        <ul>
+            {{#each genres}}
+                <li>
+                    <a href='/genre/{{this}}'>{{this}}</a>
+                </li>
+            {{/each}}
+        </ul>
+        <dt>Page Count</dt>
+        <dd>{{book.pageCount}}</dd>
+        <dt>ISBN</dt>
+        <dd>{{book.isbn}}</dd>
+        <dt>Price</dt>
+        <dd>${{book.price}}</dd>
+        <dt>Number of Copies Available</dt>
+        <dd>{{book.inventory}}</dd>
+        <dt>Thumbs Up</dt>
+        <dd>{{book.likes}}</dd>
+        <dt>Thumbs Down</dt>
+        <dd>{{book.dislikes}}</dd>
+        <dt>Reviews</dt>
+        <ul>
+            {{#each reviews}}
+                <li>
+                    <p>{{this}}</p>
+                </li>
+            {{/each}}
+        </ul>
+    </dl>
+</div>

@@ -1,0 +1,26 @@
+<h1>Shopping Cart</h1>
+{{#if Profile.cart}}
+<div id="cartTable">
+    <table id="cart_table" class="table table-striped">
+        <thead>
+            <tr>
+                <th class="td_profile_favorite_colISBN">ISBN </th>
+                <th class="td_profile_favorite_colTitle">Title </th>
+                <th class="td_profile_favorite_colDelete"> </th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each Profile.cart}}
+                <tr id="shopcart_{{{isbn}}}">
+                    <td class="td_profile_favorite_isbn">{{{isbn}}}</td>
+                    <td class="td_profile_favorite_title">{{{title}}}</td>
+                    <td class="td_profile_favorite_delete"> <button class="btn btn-primary btn_profile_deletecart" type="button" onClick="UserProfile_DeleteCartItem(String(&quot;{{{isbn}}}&quot;));" value={{{isbn}}}>Remove from cart</button></td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+{{/if}}
+
+<script src="/public/js/client/UserProfile.js"></script>
+<a class="footer-links" href="/">Return To Main Page</a>

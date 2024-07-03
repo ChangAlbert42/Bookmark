@@ -1,0 +1,147 @@
+<!--
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header"><a class="navbar-brand" href="#">Bookmark</a><button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button></div>
+        <div
+            class="collapse navbar-collapse" id="navcol-1">
+            <ul class="nav navbar-nav">
+                <li role="presentation"><a href="#">Back to store</a></li>
+            </ul><button class="btn btn-primary navbar-btn navbar-right" type="button" disabled="disabled"><strong>SIGN UP</strong></button></div>
+    </div>
+</nav>
+-->
+
+<script src="/public/js/client/UserProfile.js"></script>
+
+<ol class="breadcrumb">
+    <li><a href="#"><span>Profile</span></a></li>
+    <li class="active">
+		{{#if Profile}}
+			<span id="span_profile_usernamebreadcrumb">{{{Profile.user.username}}}</span>
+		{{else}}
+			<span id="span_profile_usernamebreadcrumb">No user data!</span>
+		{{/if}}
+	</li>
+</ol>
+<div class="container">
+    <div class="row product">
+        <div class="col-md-5 col-md-offset-0"><img class="img-responsive" src="/public/img/no_image.jpeg"></div>
+        <div class="col-md-7">
+			{{#if Profile}}
+				<h2 id="heading_profile_username">{{{Profile.user.username}}}</h2>
+				<textarea onkeyup="textCounter(this,'counter',300);" id="message">{{Profile.summary}}</textarea>
+				<script>
+				function textCounter(field,field2,maxlimit)
+				{
+					var countfield = document.getElementById(field2);
+					if ( field.value.length > maxlimit ) 
+					{
+						field.value = field.value.substring( 0, maxlimit );
+						return false;
+					} 
+					else 
+					{
+						countfield.value = maxlimit - field.value.length;
+					}
+				}
+				</script>
+				<input disabled maxlength="300" value="300" id="counter">
+			{{else}}
+				<h2 id="heading_profile_username">No user data!</h2>
+			{{/if}}
+            <p> </p><button class="btn btn-primary btn_profile_savechanges" type="button">Save changes</button></div>
+    </div>
+
+
+    <div class="page-header">
+        <h3 class="h3_profile_purchases">Order history</h3>
+    </div>
+	{{#if Profile.purchases}}
+	    <p class="p_profile_orderhistory_caption">Purchased books</p>
+	    <div class="table-responsive">
+	        <table class="table table-striped">
+	            <thead>
+	                <tr>
+	                    <th class="td_profile_purchase_colISBN">ISBN </th>
+	                    <th class="td_profile_purchase_colTitle">Title </th>
+	                </tr>
+	            </thead>
+	            <tbody>
+					{{#each Profile.purchases}}
+		                <tr id={{{isbn}}}>
+		                    <td>{{{isbn}}}</td>
+		                    <td>{{{title}}}</td>
+		                </tr>
+					{{/each}}
+	            </tbody>
+	        </table>
+	    </div>
+	{{/if}}
+
+
+	<div class="page-header">
+        <h3 class="h3_profile_favorites">Favorites</h3>
+    </div>
+	{{#if Profile.favorites}}
+	    <div class="table-responsive">
+	        <table id="favorites_table" class="table table-striped">
+	            <thead>
+	                <tr>
+	                    <th class="td_profile_favorite_colISBN">ISBN </th>
+	                    <th class="td_profile_favorite_colTitle">Title </th>
+	                    <th class="td_profile_favorite_colDelete"> </th>
+	                </tr>
+	            </thead>
+	            <tbody>
+					{{#each Profile.favorites}}
+	                    <tr id="favorite_{{{isbn}}}">
+	                        <td class="td_profile_favorite_isbn">{{{isbn}}}</td>
+	                        <td class="td_profile_favorite_title">{{{title}}}</td>
+	                        <td class="td_profile_favorite_delete"> <button class="btn btn-primary btn_profile_deletefavorite" type="button" onClick="UserProfile_DeleteFavorite({{{isbn}}});">Delete</button></td>
+	                    </tr>
+					{{/each}}
+	            </tbody>
+	        </table>
+	    </div>
+	{{/if}}
+
+
+	<div class="page-header">
+        <h3>Reviews</h3>
+    </div>
+	{{#if Profile.reviews}}
+	    <div class="media">
+	        <div class="media-body">
+				<!-- sample review if we want to add extra fields -->
+				<!-- 
+		            <h4 class="media-heading" id="td_profile_review_reviewTitle">Love this!</h4>
+		            <div><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half"></i></div>
+		            <p id="td_profile_review_reviewText">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis maximus nisl ac diam feugiat, non vestibulum libero posuere. Vivamus pharetra leo non nulla egestas, nec malesuada orci finibus. </p>
+		            <p><span class="reviewer-name"><strong>John Doe</strong></span><span class="review-date">7 Oct 2015</span></p>
+				-->
+				{{#each Profile.reviews}}
+					<div id=review_{{{review.bookdata.isbn}}} class="div_profile_reviewentry">
+						<h4 class="media-heading" id="td_profile_review_reviewTitle">review_title</h4>
+						<div>
+							{{{review.reviewdata.sentiment}}}
+						</div>
+						<textarea id=textarea_{{{review.bookdata.isbn}}} class="td_profile_review_reviewText" rows="4" cols="130" disabled="true" readonly="true">{{{review.reviewdata.review}}}</textarea> <div><button class="btn btn-primary btn_profile_editreview" type="button" onClick="UserProfile_EditReview({{{review.bookdata.isbn}}});">Edit</button><button class="btn btn-primary btn_profile_savereview" type="button" onClick="UserProfile_SaveReview({{{review.bookdata.isbn}}});">Save </button><button class="btn btn-primary btn_profile_deletereview" type="button" onClick="UserProfile_DeleteReview({{{review.bookdata.isbn}}});">Delete</button></div></p>
+					</div>
+				{{/each}}
+	        </div>
+	    </div>
+	{{/if}}
+
+
+</div>
+<footer class="site-footer">
+    <div class="container">
+        <hr>
+        <div class="row">
+            <div class="col-sm-6">
+                <h5>Bookmark © 2022</h5>
+            </div>
+            <div class="col-sm-6 social-icons"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,36 @@
+<div>
+    <form action='/search' method='POST' class='form-text'>
+        <div>
+            <label for='book-search'>Search:</label>
+            <input
+                class='search-input'
+                type='text'
+                id='book-search'
+                name='searchTerm'
+                autocomplete="off"
+                placeholder='Search by Book Title or Author'
+            />
+            <button type='submit'>Go!</button>
+        </div>
+    </form>
+</div>
+<h2>Trending Books</h2>
+<div>
+    <ul>
+        {{#each books}}
+            <li>
+                <a href='/book/{{this.title}}'>{{this.title}}</a>
+            </li>
+        {{/each}}
+    </ul>
+</div>
+<h2>Genres</h2>
+<div>
+    <ul>
+        {{#each genres}}
+            <li>
+                <a href='/genre/{{this.genre}}'>{{this.genre}}</a>
+            </li>
+        {{/each}}
+    </ul>
+</div>

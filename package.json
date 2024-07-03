@@ -1,0 +1,33 @@
+{
+  "name": "bookmark",
+  "version": "1.0.0",
+  "description": "Final project",
+  "main": "app.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "seed": "node ./tasks/seed.js",
+    "test": "node ./tasks/tests/testMongo.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StakFallT/CS546_Final.git"
+  },
+  "author": "Albert Change, Rojona Feliciano, Brandon Morris, Jaclyn Bates (10473695)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/StakFallT/CS546_Final/issues"
+  },
+  "homepage": "https://github.com/StakFallT/CS546_Final#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.1",
+    "express-handlebars": "^6.0.6",
+    "express-session": "^1.17.3",
+    "mongodb": "^4.8.1"
+  }
+}

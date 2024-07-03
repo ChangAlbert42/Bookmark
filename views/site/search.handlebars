@@ -1,0 +1,13 @@
+<h1>Search Results for "{{searchTerm}}"</h1>
+<div>
+    <ul>
+        {{#each books}}
+            <li>
+                <p>
+                    <a href='/book/{{this.title}}'>{{this.title}}</a>
+                    by {{this.author}}
+                </p>
+            </li>
+        {{/each}}
+    </ul>
+</div>

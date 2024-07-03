@@ -1,0 +1,109 @@
+<script src="/public/js/client/AdminProfile.js"></script>
+
+<ol class="breadcrumb">
+    <li><a href="#"><span>Profile</span></a></li>
+    <li class="active">
+		{{#if Profile}}
+			<span id="span_profile_usernamebreadcrumb">{{{Profile.user.username}}}</span>
+		{{else}}
+			<span id="span_profile_usernamebreadcrumb">No user data!</span>
+		{{/if}}
+	</li>
+</ol>
+<div class="container">
+    <div class="page-header">
+        <h3 class="h3_profile_purchases">Add New Books</h3>
+    </div>
+    <div class="add-book-div">
+        <form class="add-book-form-group">
+            <div>
+                <label for="add-book-title">Title:</label>
+                <input id="add-book-title-input" type="text"/>
+            </div>
+            <div>
+                <label for="add-book-author">Author:</label>
+                <input id="add-book-author-input" type="text"/>
+            </div>
+            <div>
+                <label for="add-book-price">Price:</label>
+                <input id="add-book-price-input" type="number"/>
+            </div>
+            <div>
+                <label for="add-book-isbn">ISBN:</label>
+                <input id="add-book-isbn-input" type="number"/>
+            </div>
+            <div>
+                <label for="add-book-img">Book Cover Link:</label>
+                <input id="add-book-img-input" type="text"/>
+            </div>
+            <div>
+                <label for="add-book-inventory">Inventory:</label>
+                <input id="add-book-inventory-input" type="number"/>
+            </div>
+            <div>
+                <label for="add-book-page-count">Page Count:</label>
+                <input id="add-book-page-count-input" type="number"/>
+            </div>
+            <div>
+                <label for="add-book-summary">Summary:</label>
+                <input id="add-book-summary-input" type="text"/>
+            </div>
+            <div>
+                <label for="add-book-genres">Genres:</label>
+                <select multiple id="pick-genres" class="pick-genres" name="pick-genres" id="add-book-genres">
+                    <option value="Biography">Biography</option>
+                    <option value="Children's">Children's</option>
+                    <option value="Classics">Classics</option>
+                    <option value="Dystopian">Dystopian</option>
+                    <option value="Essays">Essays</option>
+                    <option value="Fiction">Fiction</option>
+                    <option value="Mystery">Mystery</option>
+                    <option value="Nonfiction">Nonfiction</option>
+                    <option value="Poetry">Poetry</option>
+                    <option value="Politics">Politics</option>
+                    <option value="Religion">Religion</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Science Fiction">Science Fiction</option>
+                    <option value="Self-Help">Self-Help</option>
+                    <option value="Short Story">Short Story</option>
+                    <option value="Young Adult">Young Adult</option>
+                </select>
+                {{!-- <input id="add-book-genres-input" type="submit"/> --}}
+            </div>
+        </form>
+    </div>
+    <button id="add-button" type="submit" class="btn btn-primary btn_profile_editfavorite" onClick="AdminProfile_AddBook();">Add</button>
+    <div class="page-header">
+        <h3 class="h3_profile_purchases">Manage Existing Books</h3>
+    </div>
+    {{#if Profile.books}}
+	    <div class="table-responsive">
+	        <table id="favorites_table" class="table table-striped">
+	            <thead>
+	                <tr>
+	                    <th class="td_profile_favorite_colISBN">ISBN</th>
+	                    <th class="td_profile_favorite_colTitle">Title</th>
+                        <th class="td_profile_favorite_colInventory">Inventory</th>
+                        <th class="td_profile_favorite_colEdit"> </th>
+                        <th class="td_profile_favorite_colSave"> </th>
+	                    <th class="td_profile_favorite_colDelete"> </th>
+	                </tr>
+	            </thead>
+	            <tbody>
+					{{#each Profile.books}}
+	                    <tr id='favorite_{{{this.isbn}}}'>
+	                        <td class="td_profile_favorite_isbn">{{{this.isbn}}}</td>
+	                        <td class="td_profile_favorite_title">{{{this.title}}}</td>
+                            <td class=tdarea_{{{this.isbn}}} id=tdarea_{{{this.isbn}}} type="number" class="td_profile_favorite_inventory" type="number">{{{this.inventory}}}</td>
+	                        <td class="td_profile_favorite_edit"> <button class="btn btn-primary btn_profile_editfavorite" type="button" onClick="AdminProfile_EditBook('{{this.isbn}}');">Edit</button></td>
+                            <td class="td_profile_favorite_save"> <button class="btn btn-primary btn_profile_editfavorite" type="button" onClick="AdminProfile_SaveBook('{{this.isbn}}');">Save</button></td>
+                            <td class="td_profile_favorite_delete"> <button class="btn btn-primary btn_profile_editfavorite" type="button" onClick="AdminProfile_DeleteBook('{{this.isbn}}');">Delete</button></td>
+	                    </tr>
+					{{/each}}
+	            </tbody>
+	        </table>
+	    </div>
+	{{/if}}
+
+</div>
+<a class="footer-links" href="/">Return To Main Page</a>
